@@ -1,4 +1,6 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design/widgets_list.dart';
 
 class MaterialDesign extends StatefulWidget {
   const MaterialDesign({super.key});
@@ -23,7 +25,15 @@ class _MaterialDesignState extends State<MaterialDesign> {
         centerTitle: true,
         backgroundColor: Colors.orange[100],
       ),
-      body: displayComponent(imagePath: "", text: ""),
+      body: ListView.builder(
+        itemCount: widgetsList.length,
+        itemBuilder: (context, index) {
+          return displayComponent(
+            imagePath: widgetsList[index]['imagePath'],
+            text: widgetsList[index]['widget_name'],
+          );
+        },
+      ),
     );
   }
 
@@ -31,7 +41,7 @@ class _MaterialDesignState extends State<MaterialDesign> {
     return Container(
       height: 300,
       width: 390,
-      margin: EdgeInsets.all(12),
+      margin: EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -55,10 +65,15 @@ class _MaterialDesignState extends State<MaterialDesign> {
               border: Border.all(color: Colors.brown),
               borderRadius: BorderRadius.circular(20),
             ),
+            padding: EdgeInsets.all(20),
+            child: Image.asset(
+              imagePath,
+              color: Colors.brown.shade900,
+            ),
           ),
           SizedBox(height: 20),
           Text(
-            "Action Widgets",
+            text,
             style: TextStyle(
               color: Colors.brown,
               fontSize: 22,
